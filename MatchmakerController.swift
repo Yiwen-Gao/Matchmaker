@@ -1,6 +1,6 @@
 //
-//  MatchMakerController.swift
-//  Concentration
+//  MatchmakerController.swift
+//  Matchmaker
 //
 //  Created by Yiwen Gao on 3/10/18.
 //  Copyright © 2018 Yiwen Gao. All rights reserved.
@@ -18,14 +18,14 @@ class MatchmakerController: UIViewController { //superclass is UIViewController
     private var cardValues = [Int: String]() //or Dictionary<Int, String>()
     private var emojis = ["💗", "💖", "💕", "💘", "💞", "💓", "💝", "❣️"]
     
-    //    var theme = "" {
-    //        didSet {
-    //            emojis = [String]()
-    //            for emoji in theme {
-    //                emojis.append(String(emoji))
-    //            }
-    //        }
-    //    }
+    var theme = "" {
+        didSet {
+            emojis = [String]()
+            for emoji in theme {
+                emojis.append(String(emoji))
+            }
+        }
+    }
     
     private(set) var score = 0 { didSet { scoreLabel.text = "SCORE \(score)" } }
     @IBOutlet private weak var scoreLabel: UILabel!
@@ -70,13 +70,12 @@ class MatchmakerController: UIViewController { //superclass is UIViewController
         if card.isFaceUp {
             button.setTitle("M", for: UIControlState.normal)
             button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-            game.cards[index].isFaceUp = false
         }
         else if !card.isFaceUp {
             button.setTitle(emoji, for: UIControlState.normal)
             button.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-            game.cards[index].isFaceUp = true
         }
+        game.flipCard(at: index)
     }
     
     private func flipTwoCards(at index1: Int, andAt index2: Int, because match: Bool) {
@@ -90,9 +89,9 @@ class MatchmakerController: UIViewController { //superclass is UIViewController
         
         cardButtons[index1].setTitle(buttonTitle, for: UIControlState.normal)
         cardButtons[index1].backgroundColor = backgroundColor
-        game.cards[index1].isFaceUp = false
+        game.flipCard(at: index1)
         cardButtons[index2].setTitle(buttonTitle, for: UIControlState.normal)
         cardButtons[index2].backgroundColor = backgroundColor
-        game.cards[index2].isFaceUp = false
+        game.flipCard(at: index2)
     }
 }

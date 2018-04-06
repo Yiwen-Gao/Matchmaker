@@ -23,11 +23,11 @@ class Matchmaker {
 //            }
 //            return nil
 //        }
-////        set {
-////
-////        }
+//        set {
+//
+//        }
 //    }
-    
+
     init(numberOfButtons: Int) {
         while cards.count < numberOfButtons {
             /*putting structs in arrays also copies them
@@ -61,6 +61,15 @@ class Matchmaker {
         }
         else {
             faceUpCardIndex = nil
+        }
+    }
+    
+    func flipCard(at index: Int) {
+        if cards[index].isFaceUp {
+            cards[index].isFaceUp = true
+        }
+        else {
+            cards[index].isFaceUp = false
         }
     }
 }
